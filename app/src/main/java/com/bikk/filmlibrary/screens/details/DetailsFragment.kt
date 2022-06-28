@@ -28,7 +28,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     lateinit var currentMovie: MovieItemModel
     private val scope: Scope = getKoin().createScope<DetailsFragment>()
     private val viewModel: DetailsViewModel = scope.get()
-    val repo: RoomModuleInt by inject()
     private val savedShared: SavedShared = SaveSharedImpl()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,7 +91,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         .error(R.drawable.ic_broken_image)
                 )
                 .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${currentMovie.poster_path}")
-                .centerCrop()
+                .fitCenter()
                 .into(viewBinding.imgDetail)
         }
         with(viewBinding) {

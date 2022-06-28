@@ -29,6 +29,10 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.bikk.filmlibrary.screens.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

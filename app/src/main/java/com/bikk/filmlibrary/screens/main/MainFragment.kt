@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -36,7 +37,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         if (isFirst) {
             adapter = MoviesListAdapter(object : OnClickListener {
                 override fun onClick(listMovies: MovieItemModel) {
-                    val bundle = Bundle()
+                    val bundle = bundleOf()
                     bundle.putSerializable("movie", listMovies)
                     findNavController().navigate(
                         R.id.action_mainFragment_to_detailsFragment,
