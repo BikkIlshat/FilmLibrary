@@ -1,9 +1,11 @@
 package com.bikk.filmlibrary.screens.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.R
@@ -26,6 +28,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        setHasOptionsMenu(true)
     }
 
 
@@ -35,7 +38,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 override fun onClick(listMovies: MovieItemModel) {
                     val bundle = Bundle()
                     bundle.putSerializable("movie", listMovies)
-                    findNavController().navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
+                    findNavController().navigate(
+                        R.id.action_mainFragment_to_detailsFragment,
+                        bundle
+                    )
                 }
             })
 
@@ -45,21 +51,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 adapter?.submitList(it?.body()!!.results)
             }
         }
-            rvMain.adapter = adapter
+        rvMain.adapter = adapter
     }
 
-//
-//    private fun navigateToDetailsFragment() {
-//        findNavController().navigate(R.id.action_mainFragment_to_detailsFragment)
-//    }
-//
-//
-//    companion object{
-//        fun clickMovie(model: MovieItemModel){
-//            val bundle = Bundle()
-//            bundle.putSerializable("movie", model)
-//
-//        }
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_favorite -> {
+                findNavController().navigate(R.id.action_mainFragment_to_favoriteFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

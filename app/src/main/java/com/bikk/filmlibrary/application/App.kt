@@ -1,7 +1,9 @@
 package com.bikk.filmlibrary.application
 
 import android.app.Application
-import com.bikk.filmlibrary.di.DI.mainModule
+import com.bikk.filmlibrary.data.Database
+import com.bikk.filmlibrary.di.DI.localModule
+import com.bikk.filmlibrary.di.DI.remoteModule
 import com.bikk.filmlibrary.di.DI.retrofitBuilderModule
 import com.bikk.filmlibrary.di.DI.viewModelsModules
 import org.koin.android.ext.koin.androidContext
@@ -15,10 +17,23 @@ class App : Application() {
             modules(
                 listOf(
                     retrofitBuilderModule,
-                    mainModule,
-                    viewModelsModules
+                    remoteModule,
+                    viewModelsModules,
+                    localModule
                 )
             )
         }
+    }
+
+    init {
+        instance = this
+    }
+
+    val databaseService: Database by lazy { Database.createDatabase(applicationContext) }
+
+
+    companion object {
+        lateinit var instance: App
+            private set
     }
 }
