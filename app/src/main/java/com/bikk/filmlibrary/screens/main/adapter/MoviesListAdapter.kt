@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bikk.filmlibrary.R
-import com.bikk.filmlibrary.databinding.ItemLayoutBinding
 import com.bikk.filmlibrary.models.MovieItemModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bikk.filmlibrary.databinding.ItemLayoutBinding
 
 class MoviesListAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<MovieItemModel, MoviesListAdapter.MoviesViewHolder>(MoviesDiffUtil()) {
@@ -43,8 +43,8 @@ class MoviesListAdapter(private val onClickListener: OnClickListener) :
                             .placeholder(R.drawable.loading_animation)
                             .error(R.drawable.ic_broken_image)
                     )
-                    .load(listMovies.poster_path)
-                    .centerCrop()
+                    .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ listMovies.poster_path }")
+                    .fitCenter()
                     .into(this)
             }
         }
