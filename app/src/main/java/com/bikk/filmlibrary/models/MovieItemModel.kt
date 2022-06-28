@@ -1,5 +1,7 @@
 package com.bikk.filmlibrary.models
 
+import java.io.Serializable
+
 data class MovieItemModel(
     val adult: Boolean,
     val backdrop_path: String,
@@ -15,4 +17,4 @@ data class MovieItemModel(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-)
+) : Serializable

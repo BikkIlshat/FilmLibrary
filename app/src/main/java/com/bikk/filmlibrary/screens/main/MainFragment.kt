@@ -3,6 +3,7 @@ package com.bikk.filmlibrary.screens.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.R
@@ -32,7 +33,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         if (isFirst) {
             adapter = MoviesListAdapter(object : OnClickListener {
                 override fun onClick(listMovies: MovieItemModel) {
-                    navigateToDetailsFragment()
+                    val bundle = Bundle()
+                    bundle.putSerializable("movie", listMovies)
+                    findNavController().navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
                 }
             })
 
@@ -45,8 +48,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             rvMain.adapter = adapter
     }
 
+//
+//    private fun navigateToDetailsFragment() {
+//        findNavController().navigate(R.id.action_mainFragment_to_detailsFragment)
+//    }
+//
+//
+//    companion object{
+//        fun clickMovie(model: MovieItemModel){
+//            val bundle = Bundle()
+//            bundle.putSerializable("movie", model)
+//
+//        }
+//    }
 
-    private fun navigateToDetailsFragment() {
-        findNavController().navigate(R.id.action_mainFragment_to_detailsFragment)
-    }
 }
