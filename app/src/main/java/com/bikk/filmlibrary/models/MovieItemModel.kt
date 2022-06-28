@@ -1,20 +1,23 @@
 package com.bikk.filmlibrary.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.bikk.filmlibrary.util.Const
 import java.io.Serializable
 
+@Entity(tableName = Const.MOVIE_TABLE)
 data class MovieItemModel(
-    val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val original_language: String,
-    val original_title: String,
+    @ColumnInfo(name = "overview")
     val overview: String,
-    val popularity: Double,
+    @ColumnInfo(name = "poster_path")
     val poster_path: String,
+    @ColumnInfo(name = "release_date")
     val release_date: String,
+    @ColumnInfo(name = "title")
     val title: String,
-    val video: Boolean,
+    @ColumnInfo(name = "vote_average")
     val vote_average: Double,
-    val vote_count: Int
 ) : Serializable

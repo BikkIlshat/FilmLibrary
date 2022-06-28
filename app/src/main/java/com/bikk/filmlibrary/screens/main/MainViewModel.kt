@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bikk.filmlibrary.di.modules.RemoteModuleInt
+import com.bikk.filmlibrary.di.modules.remote.RemoteModuleInt
 import com.bikk.filmlibrary.models.MoviesModel
 import kotlinx.coroutines.*
 import retrofit2.Response

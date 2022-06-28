@@ -1,6 +1,6 @@
 package com.bikk.filmlibrary.di
 
-import com.bikk.filmlibrary.Const
+import com.bikk.filmlibrary.util.Const
 import com.bikk.filmlibrary.data.retrofit.ApiService
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
