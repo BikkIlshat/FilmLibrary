@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.bikk.filmlibrary.util.Const
 import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.util.Const.MOVIE_TABLE
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MoviesDao {
@@ -14,6 +16,7 @@ interface MoviesDao {
     @Delete
     fun delete(movieItemModel: MovieItemModel)
 
-    @Query("SELECT * from ${Const.MOVIE_TABLE}")
-    fun getAllMovies(): LiveData<List<MovieItemModel>>
+    @Query("SELECT * FROM $MOVIE_TABLE")
+    fun getAllMovies(): Flow<List<MovieItemModel>>
+
 }

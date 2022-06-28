@@ -7,6 +7,8 @@ import com.bikk.filmlibrary.di.modules.remote.RemoteModule
 import com.bikk.filmlibrary.di.modules.remote.RemoteModuleInt
 import com.bikk.filmlibrary.screens.details.DetailsFragment
 import com.bikk.filmlibrary.screens.details.DetailsViewModel
+import com.bikk.filmlibrary.screens.favorite.FavoriteFragment
+import com.bikk.filmlibrary.screens.favorite.FavoriteViewModel
 import com.bikk.filmlibrary.screens.main.MainFragment
 import com.bikk.filmlibrary.screens.main.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,21 +19,27 @@ object DI {
         single<RemoteModuleInt> { RemoteModule(apiService = get()) }
     }
 
+    val localModule = module {
+        single<RoomModuleInt> { RoomModule() }
+    }
+
     val retrofitBuilderModule = module {
         single <ApiService>{ RetrofitBuilder().getService() }
     }
 
     val viewModelsModules = module {
         scope<MainFragment> {
-            viewModel { MainViewModel(get()) }
+            viewModel { MainViewModel(remoteModuleInt=  get()) }
         }
 
         scope<DetailsFragment> {
-            viewModel {DetailsViewModel(get()) }
+            viewModel {DetailsViewModel(roomModuleInt =  get()) }
+        }
+
+        scope<FavoriteFragment> {
+            viewModel { FavoriteViewModel(roomModuleInt = get()) }
         }
     }
 
-    val localModule = module {
-        single<RoomModuleInt> { RoomModule() }
-    }
+
 }
