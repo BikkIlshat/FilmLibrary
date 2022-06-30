@@ -4,14 +4,11 @@ import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.R
-import com.bikk.filmlibrary.databinding.FragmentDetailBinding
 import com.bikk.filmlibrary.databinding.FragmentDetailsBinding
 import com.bikk.filmlibrary.models.MovieItemModel
-import com.bikk.filmlibrary.models.actors.Cast
 import com.bikk.filmlibrary.util.Const
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_IS_ACTIVE
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_NOT_ACTIVE
@@ -22,43 +19,50 @@ import com.bumptech.glide.request.RequestOptions
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope
 
-class DetailsFragment : Fragment(R.layout.fragment_detail) {
+class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    private val viewBinding: FragmentDetailBinding by viewBinding()
-    private var currentMovie: MovieItemModel?= null
+    private val viewBinding: FragmentDetailsBinding by viewBinding()
+    private var currentMovie: MovieItemModel? = null
     private val scope: Scope = getKoin().createScope<DetailsFragment>()
     private val viewModel: DetailsViewModel = scope.get()
     private val savedShared: SavedShared = SaveSharedImpl()
     private var adapter: ActorsListAdapter? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        currentMovie = arguments?.getSerializable("movie") as MovieItemModel
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        currentMovie = arguments?.getSerializable("movie") as MovieItemModel
+        initRecyclerView()
         init()
         setFavorite()
-        adapter = ActorsListAdapter(object : OnClickListener{
-            override fun onClick(cast: Cast) {
-                findNavController().navigateUp()
-            }
-        })
-        viewModel.onViewCreated(id = readActorsById() )
-        viewModel.actors.observe(viewLifecycleOwner) { list -> adapter?.submitList(list.body()!!.cast) }
-        viewBinding.rvMovieActors.adapter = adapter
     }
 
     private fun readActorsById(): Int {
-        return currentMovie?.id ?: 1
+        return currentMovie?.id ?: 0
     }
+
+    private fun initRecyclerView() {
+        adapter = ActorsListAdapter()
+        viewModel.getActors(id = readActorsById())
+       viewBinding.rvMovieActors.adapter = adapter
+        viewModel.actors.observe(viewLifecycleOwner) {
+            adapter?.submitList(it.body()!!.cast)
+        }
+    }
+
 
     private fun setFavorite() {
         fun updateBtnFavoriteIsNotActive() {
-            viewBinding.imgDetailFavorite.setImageResource(
+            viewBinding.imgIcFavorite.setImageResource(
                 FAVORITE_BTN_NOT_ACTIVE
             )
         }
 
         fun updateBtnFavoriteIsActive() {
-            viewBinding.imgDetailFavorite.setImageResource(
+            viewBinding.imgIcFavorite.setImageResource(
                 FAVORITE_BTN_IS_ACTIVE
             )
         }
@@ -78,7 +82,7 @@ class DetailsFragment : Fragment(R.layout.fragment_detail) {
         val valueBool = savedShared.getFavorite(requireContext(), currentMovie?.id.toString())
         updateFavoriteButton(isFavorite, valueBool)
         isFavorite = valueBool
-        viewBinding.imgDetailFavorite.setOnClickListener {
+        viewBinding.imgIcFavorite.setOnClickListener {
             isFavorite = if (!isFavorite) {
                 updateBtnFavoriteIsActive()
                 saveStateFavoriteValue(true)

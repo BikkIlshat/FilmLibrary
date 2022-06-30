@@ -13,3 +13,4 @@ class RemoteModule(private val apiService: ApiService) : RemoteModuleInt {
         return apiService.getActorsMovie(id)
     }
 }
+

@@ -11,7 +11,7 @@ interface ApiService {
     @GET("3/movie/popular?api_key=3fe888e646ae612e98d77c0b7a08da79&language=en-US&page=1")
     suspend fun getPopularMovie(): Response<MoviesModel>
 
-    @GET("3/movie/{id}credits?api_key=3fe888e646ae612e98d77c0b7a08da79&language=en-US")
+    @GET("3/movie/{id}/credits?api_key=3fe888e646ae612e98d77c0b7a08da79&language=en-US")
     suspend fun getActorsMovie(@Path("id") Int: Int): Response<ActorsModels>
 }
 

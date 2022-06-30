@@ -15,4 +15,4 @@ data class Cast(
     val original_name: String,
     val popularity: Double,
     val profile_path: String
-) : Serializable
+)

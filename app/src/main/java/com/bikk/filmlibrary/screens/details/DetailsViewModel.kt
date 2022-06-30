@@ -20,26 +20,21 @@ class DetailsViewModel(
     private val _actors = MutableLiveData<Response<ActorsModels>>()
     val actors: LiveData<Response<ActorsModels>> = _actors
 
-
     fun getActors(id: Int) {
         viewModelScope.launch {
             _actors.postValue(remoteModuleInt.getActorsMovie(id))
         }
     }
-    fun onViewCreated(id: Int) {
-        getActors(id)
-    }
 
+        fun insert(movieItemModel: MovieItemModel) =
+            viewModelScope.launch(Dispatchers.IO) {
+                roomModuleInt.insertMovies(movieItemModel)
 
-    fun insert(movieItemModel: MovieItemModel) =
-        viewModelScope.launch(Dispatchers.IO) {
-            roomModuleInt.insertMovies(movieItemModel)
+            }
 
-        }
-
-    fun delete(movieItemModel: MovieItemModel) =
-        viewModelScope.launch(Dispatchers.IO) {
-            roomModuleInt.deleteMovies(movieItemModel)
-        }
+        fun delete(movieItemModel: MovieItemModel) =
+            viewModelScope.launch(Dispatchers.IO) {
+                roomModuleInt.deleteMovies(movieItemModel)
+            }
 
 }

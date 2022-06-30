@@ -7,10 +7,10 @@
     android:padding="3dp">
 
     <ImageView
-        android:src="@drawable/ic_andr"
         android:id="@+id/item_img_movie_actor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginStart="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

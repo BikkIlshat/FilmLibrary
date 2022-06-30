@@ -1,5 +1,4 @@
 package com.bikk.filmlibrary.screens.details
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,8 @@ import com.bikk.filmlibrary.util.Const.BASE_IMAGE_URL
 import com.bumptech.glide.Glide
 
 
-class DetailAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<DetailAdapter.MyViewHolder>() {
+
+class DetailAdapter : RecyclerView.Adapter<DetailAdapter.MyViewHolder>() {
     private var actorList = emptyList<Cast>()
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -23,11 +23,7 @@ class DetailAdapter(private val onClickListener: OnClickListener) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.setOnClickListener{
-            onClickListener.onClick(actorList[position])
-        }
         holder.itemView.findViewById<TextView>(R.id.item_name_actor).text = actorList[position].name
-
         Glide.with(holder.itemView.context)
             .load("$BASE_IMAGE_URL${actorList[position].profile_path}")
             .centerCrop()
