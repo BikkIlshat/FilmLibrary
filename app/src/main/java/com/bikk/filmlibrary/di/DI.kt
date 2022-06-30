@@ -33,7 +33,7 @@ object DI {
         }
 
         scope<DetailsFragment> {
-            viewModel {DetailsViewModel(roomModuleInt =  get()) }
+            viewModel {DetailsViewModel(roomModuleInt =  get(), remoteModuleInt = get()) }
         }
 
         scope<FavoriteFragment> {
