@@ -35,7 +35,7 @@ class MoviesListAdapter(private val onClickListener: OnClickListener) :
             itemTitle.text = listMovies.title
             itemDate.text = listMovies.release_date
             verticalImdb.text = listMovies.vote_average.toString()
-            itemImg.apply {
+            itemImgMovieActor.apply {
                 Glide
                     .with(context)
                     .setDefaultRequestOptions(
