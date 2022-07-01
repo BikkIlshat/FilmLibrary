@@ -29,7 +29,6 @@ class MoviesPagingAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val item = getItem(position)
-
         holder.itemView.setOnClickListener { item?.let { it1 -> onClickListener.onClick(it1) } }
         item?.let { holder.bind(it) }
 

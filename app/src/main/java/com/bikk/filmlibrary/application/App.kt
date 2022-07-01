@@ -2,6 +2,7 @@ package com.bikk.filmlibrary.application
 
 import android.app.Application
 import com.bikk.filmlibrary.data.Database
+import com.bikk.filmlibrary.di.DI.SaveShared
 import com.bikk.filmlibrary.di.DI.localModule
 import com.bikk.filmlibrary.di.DI.remoteModule
 import com.bikk.filmlibrary.di.DI.retrofitBuilderModule
@@ -19,7 +20,8 @@ class App : Application() {
                     retrofitBuilderModule,
                     remoteModule,
                     viewModelsModules,
-                    localModule
+                    localModule,
+                    SaveShared
                 )
             )
         }
