@@ -1,9 +1,7 @@
 package com.bikk.filmlibrary.di.modules.local
 
-import androidx.lifecycle.LiveData
 import com.bikk.filmlibrary.application.App
-import com.bikk.filmlibrary.data.room.MoviesDao
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 import kotlinx.coroutines.flow.Flow
 
 class RoomModule() : RoomModuleInt {

@@ -1,4 +1,4 @@
-package com.bikk.filmlibrary.models
+package com.bikk.filmlibrary.models.movies
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

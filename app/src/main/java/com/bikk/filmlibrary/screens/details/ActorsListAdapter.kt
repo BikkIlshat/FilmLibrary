@@ -1,14 +1,19 @@
 package com.bikk.filmlibrary.screens.details
 
+import android.graphics.text.LineBreaker
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bikk.filmlibrary.R
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
+import coil.size.PixelSize
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
+import com.bikk.filmlibrary.databinding.ItemLayoutBinding
 import com.bikk.filmlibrary.databinding.ItemLayoutMovieActorsBinding
 import com.bikk.filmlibrary.models.actors.Cast
 import com.bikk.filmlibrary.util.Const.BASE_IMAGE_URL
@@ -29,17 +34,15 @@ class ActorsListAdapter() : ListAdapter<Cast, ActorsListAdapter.ActorsViewHolder
     }
 
     class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val viewBinding: ItemLayoutMovieActorsBinding by viewBinding()
+        private val viewBinding by viewBinding(ItemLayoutMovieActorsBinding::bind)
         fun bind(cast: Cast) = with(viewBinding) {
             itemNameActor.text = cast.name
-            itemImgMovieActor.apply {
-                Glide
-                    .with(context)
-                    .load("$BASE_IMAGE_URL${cast.profile_path }")
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(viewBinding.itemImgMovieActor)
+            itemNameActor.justificationMode = JUSTIFICATION_MODE_INTER_WORD
+            itemImgMovieActor.load("$BASE_IMAGE_URL${cast.profile_path}") {
+                transformations(RoundedCornersTransformation(25f))
             }
         }
     }
 }
+
+

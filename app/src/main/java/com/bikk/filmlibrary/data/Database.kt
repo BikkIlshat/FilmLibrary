@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bikk.filmlibrary.util.Const
 import com.bikk.filmlibrary.data.room.MoviesDao
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 
 
 @Database(

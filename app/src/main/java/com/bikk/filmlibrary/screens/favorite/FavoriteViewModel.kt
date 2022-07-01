@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.bikk.filmlibrary.di.modules.local.RoomModuleInt
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 
 class FavoriteViewModel(
     private val roomModuleInt: RoomModuleInt
