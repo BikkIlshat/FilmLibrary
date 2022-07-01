@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.R
 import com.bikk.filmlibrary.databinding.FragmentFavoriteBinding
 import com.bikk.filmlibrary.models.MovieItemModel
-import com.bikk.filmlibrary.screens.details.DetailsFragment
-import com.bikk.filmlibrary.screens.details.DetailsViewModel
-import com.bikk.filmlibrary.screens.main.adapter.MoviesListAdapter
 import com.bikk.filmlibrary.screens.main.adapter.OnClickListener
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope

@@ -24,16 +24,16 @@ object DI {
     }
 
     val retrofitBuilderModule = module {
-        single <ApiService>{ RetrofitBuilder().getService() }
+        single<ApiService> { RetrofitBuilder().getService() }
     }
 
     val viewModelsModules = module {
         scope<MainFragment> {
-            viewModel { MainViewModel(remoteModuleInt=  get()) }
+            viewModel { MainViewModel(apiService = get()) }
         }
 
         scope<DetailsFragment> {
-            viewModel {DetailsViewModel(roomModuleInt =  get(), remoteModuleInt = get()) }
+            viewModel { DetailsViewModel(roomModuleInt = get(), remoteModuleInt = get()) }
         }
 
         scope<FavoriteFragment> {

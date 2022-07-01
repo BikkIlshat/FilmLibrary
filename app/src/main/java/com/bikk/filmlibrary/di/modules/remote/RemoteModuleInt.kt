@@ -6,6 +6,6 @@ import retrofit2.Response
 import retrofit2.http.Path
 
 interface RemoteModuleInt {
-    suspend fun getMovies(): Response<MoviesModel>
+    suspend fun getMovies(page:Int): Response<MoviesModel>
     suspend fun getActorsMovie(id: Int): Response<ActorsModels>
 }

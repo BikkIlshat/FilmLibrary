@@ -1,24 +1,18 @@
 package com.bikk.filmlibrary.screens.main
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bikk.filmlibrary.di.modules.remote.RemoteModuleInt
-import com.bikk.filmlibrary.models.MoviesModel
-import kotlinx.coroutines.*
-import retrofit2.Response
-
-class MainViewModel(private val remoteModuleInt: RemoteModuleInt) : ViewModel() {
-
-
-    private val _mMovies = MutableLiveData<Response<MoviesModel>>()
-    val mMovies: LiveData<Response<MoviesModel>> = _mMovies
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.bikk.filmlibrary.data.retrofit.ApiService
+import com.bikk.filmlibrary.data.retrofit.paging.MoviesPagingSource
 
 
-    fun getMoviesRetrofit() {
-        viewModelScope.launch {
-            _mMovies.postValue(remoteModuleInt.getMovies())
-        }
-    }
+class MainViewModel(private val apiService: ApiService) : ViewModel() {
+
+    val listData = Pager(PagingConfig(pageSize = 1)) {
+        MoviesPagingSource(apiService)
+
+    }.flow.cachedIn(viewModelScope)
+
 }

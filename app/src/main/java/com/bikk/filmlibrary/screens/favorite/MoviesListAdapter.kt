@@ -1,4 +1,4 @@
-package com.bikk.filmlibrary.screens.main.adapter
+package com.bikk.filmlibrary.screens.favorite
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.databinding.ItemLayoutBinding
+import com.bikk.filmlibrary.screens.main.adapter.MoviesDiffUtil
+import com.bikk.filmlibrary.screens.main.adapter.OnClickListener
 
 class MoviesListAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<MovieItemModel, MoviesListAdapter.MoviesViewHolder>(MoviesDiffUtil()) {
@@ -35,7 +37,7 @@ class MoviesListAdapter(private val onClickListener: OnClickListener) :
             itemTitle.text = listMovies.title
             itemDate.text = listMovies.release_date
             verticalImdb.text = listMovies.vote_average.toString()
-            itemImgMovieActor.apply {
+            itemImgMovie.apply {
                 Glide
                     .with(context)
                     .setDefaultRequestOptions(
