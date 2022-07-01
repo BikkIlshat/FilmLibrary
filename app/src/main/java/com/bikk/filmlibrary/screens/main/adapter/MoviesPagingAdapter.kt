@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.bikk.filmlibrary.R
 import com.bikk.filmlibrary.databinding.ItemLayoutBinding
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
+import com.bikk.filmlibrary.util.Const
+import com.bikk.filmlibrary.util.Const.BASE_IMAGE_URL
 
 class MoviesPagingAdapter(private val onClickListener: OnClickListener) :
     PagingDataAdapter<MovieItemModel, MoviesViewHolder>(MoviesDiffUtilCallback) {
@@ -40,7 +43,9 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemTitle.text = listMovies?.title
         itemDate.text = listMovies?.release_date
         verticalImdb.text = listMovies?.vote_average.toString()
-        itemImgMovie.load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${listMovies?.poster_path}")
+        itemImgMovie.load("$BASE_IMAGE_URL${listMovies?.poster_path}") {
+            transformations(RoundedCornersTransformation(25f))
+        }
     }
 }
 

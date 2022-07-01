@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bikk.filmlibrary.R
 import com.bikk.filmlibrary.databinding.FragmentMainBinding
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 import com.bikk.filmlibrary.screens.main.adapter.MoviesPagingAdapter
 import com.bikk.filmlibrary.screens.main.adapter.OnClickListener
 import kotlinx.coroutines.launch

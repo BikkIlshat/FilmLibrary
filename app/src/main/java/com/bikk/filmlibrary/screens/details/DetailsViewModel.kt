@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bikk.filmlibrary.di.modules.local.RoomModuleInt
 import com.bikk.filmlibrary.di.modules.remote.RemoteModuleInt
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 import com.bikk.filmlibrary.models.actors.ActorsModels
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -3,7 +3,7 @@ package com.bikk.filmlibrary.data.retrofit.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bikk.filmlibrary.data.retrofit.ApiService
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 
 
 class MoviesPagingSource(private val apiService: ApiService) : PagingSource<Int, MovieItemModel>() {

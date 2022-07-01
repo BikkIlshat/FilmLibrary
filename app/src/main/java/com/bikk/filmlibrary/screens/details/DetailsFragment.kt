@@ -4,18 +4,16 @@ import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
 import com.bikk.filmlibrary.R
 import com.bikk.filmlibrary.databinding.FragmentDetailsBinding
-import com.bikk.filmlibrary.models.MovieItemModel
+import com.bikk.filmlibrary.models.movies.MovieItemModel
 import com.bikk.filmlibrary.util.Const
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_IS_ACTIVE
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_NOT_ACTIVE
 import com.bikk.filmlibrary.util.SaveSharedImpl
 import com.bikk.filmlibrary.util.SavedShared
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope
 
@@ -95,22 +93,11 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 false
             }
         }
-
     }
 
     private fun init() {
-        context?.let {
-            Glide.with(it)
-                .setDefaultRequestOptions(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .load("${Const.BASE_IMAGE_URL}${currentMovie?.poster_path}")
-                .fitCenter()
-                .into(viewBinding.imgDetail)
-        }
         with(viewBinding) {
+            imgDetail.load("${Const.BASE_IMAGE_URL}${currentMovie?.poster_path}")
             tvTitle.text = currentMovie?.title
             tvDate.text = currentMovie?.release_date
             tvDescription.text = currentMovie?.overview

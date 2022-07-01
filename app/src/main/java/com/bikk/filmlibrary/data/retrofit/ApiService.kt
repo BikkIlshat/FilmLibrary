@@ -1,6 +1,6 @@
 package com.bikk.filmlibrary.data.retrofit
 
-import com.bikk.filmlibrary.models.MoviesModel
+import com.bikk.filmlibrary.models.movies.MoviesModel
 import com.bikk.filmlibrary.models.actors.ActorsModels
 import retrofit2.Response
 import retrofit2.http.GET
