@@ -37,6 +37,7 @@ class ActorsListAdapter() : ListAdapter<Cast, ActorsListAdapter.ActorsViewHolder
         private val viewBinding by viewBinding(ItemLayoutMovieActorsBinding::bind)
         fun bind(cast: Cast) = with(viewBinding) {
             itemNameActor.text = cast.name
+            itemNameActor.justificationMode = JUSTIFICATION_MODE_INTER_WORD
             itemImgMovieActor.load("$BASE_IMAGE_URL${cast.profile_path}") {
                 transformations(RoundedCornersTransformation(25f))
             }

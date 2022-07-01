@@ -10,11 +10,13 @@ import com.bikk.filmlibrary.R
 import com.bikk.filmlibrary.databinding.FragmentDetailsBinding
 import com.bikk.filmlibrary.models.movies.MovieItemModel
 import com.bikk.filmlibrary.util.Const
+import com.bikk.filmlibrary.util.Const.BASE_IMAGE_URL
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_IS_ACTIVE
 import com.bikk.filmlibrary.util.Const.FAVORITE_BTN_NOT_ACTIVE
-import com.bikk.filmlibrary.util.SaveSharedImpl
 import com.bikk.filmlibrary.util.SavedShared
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
@@ -23,7 +25,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private var currentMovie: MovieItemModel? = null
     private val scope: Scope = getKoin().createScope<DetailsFragment>()
     private val viewModel: DetailsViewModel = scope.get()
-    private val savedShared: SavedShared = SaveSharedImpl()
+    private val savedShared: SavedShared by inject(named(Const.SAVE_SHARED))
     private var adapter: ActorsListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +47,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private fun initRecyclerView() {
         adapter = ActorsListAdapter()
         viewModel.getActors(id = readActorsById())
-       viewBinding.rvMovieActors.adapter = adapter
+        viewBinding.rvMovieActors.adapter = adapter
         viewModel.actors.observe(viewLifecycleOwner) {
             adapter?.submitList(it.body()!!.cast)
         }
@@ -66,7 +68,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
 
         fun saveStateFavoriteValue(boolean: Boolean) {
-            savedShared.setFavorite(requireContext(), currentMovie?.id.toString(), boolean)
+            savedShared.setFavorite(currentMovie?.id.toString(), boolean)
         }
 
         var isFavorite = false
@@ -77,7 +79,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             }
         }
 
-        val valueBool = savedShared.getFavorite(requireContext(), currentMovie?.id.toString())
+        val valueBool = savedShared.getFavorite(currentMovie?.id.toString())
         updateFavoriteButton(isFavorite, valueBool)
         isFavorite = valueBool
         viewBinding.imgIcFavorite.setOnClickListener {
@@ -97,7 +99,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun init() {
         with(viewBinding) {
-            imgDetail.load("${Const.BASE_IMAGE_URL}${currentMovie?.poster_path}")
+            imgDetail.load("$BASE_IMAGE_URL${currentMovie?.poster_path}")
             tvTitle.text = currentMovie?.title
             tvDate.text = currentMovie?.release_date
             tvDescription.text = currentMovie?.overview
